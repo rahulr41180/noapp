@@ -28,7 +28,8 @@ const productDetailsUpload = async (req, res) => {
 
         return res.status(200).send({
             status : true,
-            result : products
+            result : products,
+            message : "CSV file data has been processed and uploaded successfully"
         })
     } catch(error) {
         res.status(500).send({

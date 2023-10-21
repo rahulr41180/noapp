@@ -10,8 +10,8 @@ const csvFileValidationMiddleware = async (req, res, next) => {
         if (!req.file) {
             return res.status(400).send({
                 status: false,
-                message: "No file present for uploading....."
 
+                message: "No file present for uploading....."
             })
         }
         const results = [];
@@ -45,7 +45,12 @@ const csvFileValidationMiddleware = async (req, res, next) => {
                 next();
             })
     } catch (error) {
+        
 
+        return res.status(500).send({
+            status : false,
+            message : error.message
+        })
     }
 }
 
@@ -91,5 +96,6 @@ const validateCSVData = (data) => {
 }
 
 module.exports = {
-    csvFileValidationMiddleware
+    csvFileValidationMiddleware,
+    validateCSVData
 }
