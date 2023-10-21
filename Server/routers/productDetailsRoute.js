@@ -19,9 +19,11 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage : storage });
 
-router.get("/details", productDetails);
+// Getting Data || METHOD : GET
 
+router.get("/all-products/:page/:items", productDetails);
 
+// Storing Data || METHOD : POST
 router.post("/details-upload", upload.single("csvFile"), csvFileValidationMiddleware, productDetailsUpload);
 
 module.exports =  router;
