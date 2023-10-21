@@ -21,10 +21,15 @@ app.use(cors());
 app.use(express.json());
 
 
+// Router Importing
+import productDetailsRouter from "./routers/productDetailsRoute.js"
+
+
 // routes
 app.get("/", (req, res) => {
     res.send("<h1>Hello World</h1>")
 })
+app.use("/api/product", productDetailsRouter);
 
 // PORT
 const PORT = process.env.PORT || 8080;
