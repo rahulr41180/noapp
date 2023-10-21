@@ -30,16 +30,17 @@ const productDetails = new mongoose.Schema({
         required : true,
     },
     discount_price : {
+        
         type : Number,
-        required : false,
         default : 0
     },
     rating : {
-        type : String,
+        type : Number,
         default : 1
     },
     image_url : {
         type : String
+
     }
 })
 

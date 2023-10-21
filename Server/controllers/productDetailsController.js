@@ -1,7 +1,7 @@
 
 const productModel = require("../models/productDetailsModel.js");
 
-const csvToJson = require("csvtojson");
+const csv = require("csvtojson");
 
 const productDetails = async (req, res) => {
 
@@ -22,16 +22,9 @@ const productDetails = async (req, res) => {
 const productDetailsUpload = async (req, res) => {
 
     try {
-        console.log('req.file:', req.file)
-        if(!req.file) {
-            return res.status(400).send({
-                status : false,
-                message : "No file present for uploading....."
-            })
-        }
-        const jsonArray = await csvToJson().fromFile(req.file.path);
-
-        const products = await productModel.insertMany(jsonArray);
+        // console.log("req.results :", req.results)
+        // const jsonArray = await csv().fromFile(req.file.path);
+        const products = await productModel.insertMany(req.results);
 
         return res.status(200).send({
             status : true,
