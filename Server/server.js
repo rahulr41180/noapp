@@ -29,7 +29,7 @@ app.use(express.static(path.resolve(__dirname, "public")));
 // Router Importing
 const productDetailsRouter = require("./routers/productDetailsRoute.js");
 const csvFilesRouter = require("./routers/productCSVFileUploadStatusRouter.js");
-const authRoutes = require("./routes/authRoutes.js");
+const authRoutes = require("./routers/authRoutes.js");
 
 
 // routes
