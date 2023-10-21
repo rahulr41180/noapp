@@ -2,10 +2,12 @@
 // const express = require("express");
 
 // module based / ES6 Based
-import express from "express";
-import cors from "cors";
-import { connectDB } from "./config/db.js";
-import dotenv from "dotenv";
+const express = require("express");
+const cors =  require("cors");
+const connectDB =  require("./config/db.js");
+const dotenv =  require("dotenv");
+const path =  require("path");
+const bodyParser =  require("body-parser");
 
 // Configure .env file
 dotenv.config();
@@ -20,9 +22,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(express.static(path.resolve(__dirname, "public")));
+
 
 // Router Importing
-import productDetailsRouter from "./routers/productDetailsRoute.js"
+const productDetailsRouter = require("./routers/productDetailsRoute.js");
 
 
 // routes
