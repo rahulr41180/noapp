@@ -28,13 +28,17 @@ app.use(express.static(path.resolve(__dirname, "public")));
 
 // Router Importing
 const productDetailsRouter = require("./routers/productDetailsRoute.js");
+const csvFilesRouter = require("./routers/productCSVFileUploadStatusRouter.js");
+const authRoutes = require("./routes/authRoutes.js");
 
 
 // routes
 app.get("/", (req, res) => {
     res.send("<h1>Hello World</h1>")
 })
+app.use("/api/auth", authRoutes);
 app.use("/api/product", productDetailsRouter);
+app.use("/api/csv", csvFilesRouter);
 
 // PORT
 const PORT = process.env.PORT || 8080;

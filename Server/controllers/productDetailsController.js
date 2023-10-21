@@ -1,6 +1,8 @@
 
 const productModel = require("../models/productDetailsModel.js");
 
+const csvfileUploadModel = require("../models/productCSVFileUploadStatusModel.js");
+
 const csv = require("csvtojson");
 
 // Getting Product Data Controller
@@ -50,16 +52,27 @@ const unitTestingProductDetailsUpload = async (data) => {
 }
 
 
-const productDetailsUpload = async (req, res) => {
 
+const productDetailsUpload = async (req, res) => {
     try {
         // console.log("req.results :", req.results)
+        console.log("req.file :", req.file);
         // const jsonArray = await csv().fromFile(req.file.path);
         const products = await productModel.insertMany(req.results);
+
+
+        // Uploading CSV File In Database With Status As True
+
+        const csvFileUploadStatus = await csvfileUploadModel.create({
+            csvFileName : req.file.filename,
+            uploadStatus : true,
+        })
 
         return res.status(200).send({
             status : true,
             result : products,
+            csvFileUploadStatus : csvFileUploadStatus,
+            
             message : "CSV file data has been processed and uploaded successfully"
         })
     } catch(error) {
@@ -73,7 +86,6 @@ const productDetailsUpload = async (req, res) => {
 
 module.exports =  {
     productDetails,
-
     productDetailsUpload,
     unitTestingProductDetailsUpload
 }
