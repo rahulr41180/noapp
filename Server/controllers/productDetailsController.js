@@ -19,6 +19,24 @@ const productDetails = async (req, res) => {
 
 }
 
+const unitTestingProductDetailsUpload = async (data) => {
+
+    console.log('data:', data)
+
+    try {
+        await productModel.insertOne(data);
+    } catch(error) {
+        res.status(500).send({
+            status : false,
+            error : error.message
+        })
+    } finally {
+        process.exit(0);
+    }
+
+}
+
+
 const productDetailsUpload = async (req, res) => {
 
     try {
@@ -42,5 +60,6 @@ const productDetailsUpload = async (req, res) => {
 
 module.exports =  {
     productDetails,
-    productDetailsUpload
+    productDetailsUpload,
+    unitTestingProductDetailsUpload
 }
