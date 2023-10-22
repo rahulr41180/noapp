@@ -5,6 +5,34 @@ const csvfileUploadModel = require("../models/productCSVFileUploadStatusModel.js
 
 const csv = require("csvtojson");
 
+const totalProductCount = async (req, res) => {
+
+    try {
+        const page = parseInt(req.params.page) || 1;
+        const itemsSkip = parseInt(req.params.items) || 10;
+
+        console.log('itemsSkip:', itemsSkip);
+        console.log('page:', page);
+        // Calculate the skip value based on page and itemsSkip
+        const skip = (page - 1) * itemsSkip;
+        const products = await productModel.find().skip(skip).limit(itemsSkip);
+
+        res.status(200).send({
+            status : true,
+            products : products,
+
+            // totalProducts : totalProducts
+        })
+
+    } catch(error) {
+        res.status(500).send({
+            status : false
+        })
+    }
+
+}
+
+
 // Getting Product Data Controller
 
 const productDetails = async (req, res) => {
@@ -23,7 +51,7 @@ const productDetails = async (req, res) => {
             status : true,
             products : products,
 
-            totalProduct : products.length
+            // totalProducts : totalProducts
         })
 
     } catch(error) {
@@ -73,7 +101,8 @@ const productDetailsUpload = async (req, res) => {
             result : products,
             csvFileUploadStatus : csvFileUploadStatus,
             
-            message : "CSV file data has been processed and uploaded successfully"
+            message : "CSV file data has been processed and uploaded successfully",
+            navigate : "/"
         })
     } catch(error) {
         res.status(500).send({
@@ -87,5 +116,6 @@ const productDetailsUpload = async (req, res) => {
 module.exports =  {
     productDetails,
     productDetailsUpload,
-    unitTestingProductDetailsUpload
+    unitTestingProductDetailsUpload,
+    totalProductCount
 }

@@ -2,7 +2,7 @@
 const express = require("express");
 
 const router = express.Router();
-const { productDetails, productDetailsUpload } = require("../controllers/productDetailsController.js");
+const { productDetails, productDetailsUpload, totalProductCount } = require("../controllers/productDetailsController.js");
 const { csvFileValidationMiddleware } = require("../Middlewares/csvFileValidationMiddleware.js");
 const { requireSignIn, isAdmin } = require("../Middlewares/authMiddleware.js");
 const multer = require("multer");
