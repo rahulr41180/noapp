@@ -24,6 +24,19 @@ It will open at "http://localhost:3000"
 - npm install
 - npm server
 
+  ### <u>Run Unit Testing</u>
+
+- Go Into Server by cd server
+- Go Into UnitTest by cd unittest
+  Run The commands : npx mocha unitTesting.js
+
+  ### <u>Uploading CSV File</u>
+
+- While uploading csv file make sure you are login with admin profile because you won't be able to without admin credentials
+- For Testing Purpose, Please login by these credentials.
+- email : admin1@gmail.com
+- password : admin1
+
 <div style='page-break-after: always'></div>
 
 ### <u>Frontend Technologies we used</u>
