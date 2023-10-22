@@ -1,6 +1,7 @@
 
 const mongoose = require("mongoose");
 
+// CSV File Upload Status Schema
 const csvFileUploadStatus = new mongoose.Schema({
     csvFileName : {
         type : String,
@@ -10,7 +11,6 @@ const csvFileUploadStatus = new mongoose.Schema({
         type : Boolean,
         default : false
     }
-
 })
 
 module.exports = mongoose.model("csvfileuploadstatus", csvFileUploadStatus);

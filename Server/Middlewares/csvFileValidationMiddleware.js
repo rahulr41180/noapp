@@ -3,14 +3,15 @@ const csv = require("csv-parser");
 
 const fs = require("fs");
 
+// Middleware For CSV Data Fields Validation And Converting CSV Data Into JSON Formate
+
 let rowNumber = 0;
 const csvFileValidationMiddleware = async (req, res, next) => {
     try {
-        console.log('req.file:', req.file);
+        // console.log('req.file:', req.file);
         if (!req.file) {
             return res.status(400).send({
                 status: false,
-
                 message: "No file present for uploading....."
             })
         }
@@ -25,14 +26,13 @@ const csvFileValidationMiddleware = async (req, res, next) => {
 
                 } else {
                     errorResult.push(validationResult.errorObject);
-
                 }
             })
             .on("end", () => {
                 rowNumber = 0;
-                // console.log('results:', results);
-                console.log('errorResult:', errorResult)
 
+                // console.log('results:', results);
+                // console.log('errorResult:', errorResult)
                 if (errorResult.length > 0) {
                     // Unprocessable Entity
                     return res.status(422).send({
@@ -45,8 +45,6 @@ const csvFileValidationMiddleware = async (req, res, next) => {
                 next();
             })
     } catch (error) {
-        
-
         return res.status(500).send({
             status : false,
             message : error.message
@@ -54,11 +52,11 @@ const csvFileValidationMiddleware = async (req, res, next) => {
     }
 }
 
+// Vlidation
 const validateCSVData = (data) => {
     // const validateErrorForEach = [];
     rowNumber++;
-    console.log('data:', data)
-
+    // console.log('data:', data)
     let flag = true;
     const errorObject = {
         missingFields: "",
@@ -74,8 +72,7 @@ const validateCSVData = (data) => {
     }
     if (isNaN(data.price) || isNaN(data.discount_price) || isNaN(data.rating)) {
         flag = false,
-        
-            errorObject.typeError = `Price, Discount_Price and Rating should be in number format for row ${rowNumber}`
+        errorObject.typeError = `Price, Discount_Price and Rating should be in number format for row ${rowNumber}`
         // return {
         //     isValid: false,
 
@@ -92,7 +89,6 @@ const validateCSVData = (data) => {
     return {
         isValid: true
     }
-
 }
 
 module.exports = {

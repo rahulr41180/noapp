@@ -7,6 +7,8 @@ const { csvFileValidationMiddleware } = require("../Middlewares/csvFileValidatio
 const { requireSignIn, isAdmin } = require("../Middlewares/authMiddleware.js");
 const multer = require("multer");
 const path = require("path");
+
+// Uploading CSV File Into Folder
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         // Set the destination folder for CSV file uploads
@@ -18,10 +20,13 @@ const storage = multer.diskStorage({
     },
 });
 
+
 const upload = multer({ storage : storage });
 
-// Getting Data || METHOD : GET
+// Getting Data Length || METHOD : GET
+router.get("/all-product-count", totalProductCount);
 
+// Getting Data || METHOD : GET
 router.get("/all-products/:page/:items", productDetails);
 
 // Storing Data || METHOD : POST

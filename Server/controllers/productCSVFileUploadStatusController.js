@@ -1,6 +1,8 @@
 
 const csvFileUploadModel = require("../models/productCSVFileUploadStatusModel.js");
 
+// Getting CSV Files Upload Status
+
 const gettingCSVFiles = async (req, res) => {
     try {
         const csvFiles = await csvFileUploadModel.find();
@@ -10,7 +12,6 @@ const gettingCSVFiles = async (req, res) => {
             csvFiles : csvFiles
         })
 
-
     } catch(error) {
         return res.status(500).send({
             status : false,
@@ -19,7 +20,7 @@ const gettingCSVFiles = async (req, res) => {
     }
 }
 
-module.exports = {
 
+module.exports = {
     gettingCSVFiles
 }

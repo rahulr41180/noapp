@@ -5,12 +5,13 @@ const { hashPassword, comparePassword } = require("../helpers/authHelper.js");
 const JWT = require("jsonwebtoken");
 
 // POST METHOD FOR REGISTRATION
+
 const registerController = async (req, res) => {
     try {
         // console.log('req.body:', req.body)
         const { name, email, password } = req.body;
-        // validation
 
+        // validation
         if(!name) {
             return res.status(404).send({
                 status : false,
@@ -45,17 +46,15 @@ const registerController = async (req, res) => {
             })
         }
 
-
         // User registration
 
         // Password hashing
         const hashedPassword = await hashPassword(password);
+        // console.log("hashedPassword :", hashedPassword);
 
-        console.log("hashedPassword :", hashedPassword);
-        // Save
+        // Save User
         const user = await new userModel({name, email, password : hashedPassword}).save();
-        console.log("user", user);
-
+        // console.log("user", user);
 
         res.status(201).send({
             message : "User registered successfully",
@@ -78,13 +77,14 @@ const registerController = async (req, res) => {
 }
 
 // METHOD POST FOR LOGIN
+
 const loginController = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log('password:', password)
-        console.log('email:', email)
-        // Validation
+        // console.log('password:', password)
+        // console.log('email:', email)
 
+        // Validation
         if(!email || !password) {
             return res.status(201).send({
                 status : false,
@@ -94,7 +94,6 @@ const loginController = async (req, res) => {
         }
 
         // Check User is exists or not
-
         const user = await userModel.findOne({email : email});
         // console.log('user:', user)
         if(!user) {
@@ -126,7 +125,6 @@ const loginController = async (req, res) => {
             status : true,
             message : "Login has successfully done.",
             user : {
-
                 name : user.name,
                 email : user.email,
                 address : user.address,
@@ -134,7 +132,6 @@ const loginController = async (req, res) => {
                 role : user.role
             },
             token : token,
-
             navigate : "/"
         })
     } catch (error) {
@@ -148,7 +145,6 @@ const loginController = async (req, res) => {
 }
 
 module.exports = { 
-registerController, 
-loginController, 
-
+    registerController, 
+    loginController, 
 };

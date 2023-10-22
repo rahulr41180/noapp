@@ -1,33 +1,30 @@
 
 import { Header } from "../Components/Header"
 
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+require("../Css/ProductPage.css")
 
 export const ProductsPage = () => {
 
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    console.log('currentPage:', currentPage)
-    console.log('currentPage:', currentPage)
     const [itemsPerPage, setItemsPerPage] = useState(10);
-    console.log('itemsPerPage:', itemsPerPage)
     const [totalPages, setTotalPages] = useState(1);
-    console.log('totalPages:', totalPages)
-
     const [isLoading, setIsLoading] = useState(true);
-    console.log('isLoading:', isLoading)
 
+    // Use Effect For Paginate Data
     useEffect(() => {
         getAllProduct();
     }, [currentPage, itemsPerPage])
 
+    // Fetching Paginate Data
     const getAllProduct = async () => {
         try {
             const product = await axios.get(`/api/product/all-products/${currentPage}/${itemsPerPage}`);
-
-            console.log('product:', product)
+            // console.log('product:', product)
             if (product?.data?.status) {
                 setProducts(product.data.products);
                 setIsLoading(false);
@@ -35,16 +32,28 @@ export const ProductsPage = () => {
                 toast.error(product.data.message);
             }
         } catch (error) {
-
+            
             console.log(error.message);
-
         }
     }
 
-    useEffect( async () => {
-        // Function to calculate total pages
-        const productLength = await axios.get("/api/product/all-product-length");
+    // Function to calculate total pages
+    useEffect(() => {
+        getAllProductLength();
     }, []);
+
+    // Getting All Product Count
+    const getAllProductLength = async () => {
+        try {
+            const productLength = await axios.get("/api/product/all-product-count");
+            // console.log('productLength:', productLength);
+            if(productLength?.data?.status) {
+                setTotalPages(Math.ceil(productLength?.data.productLength/ itemsPerPage));
+            }
+        } catch(error) {
+            console.log(error.message);
+        }
+    }
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
@@ -55,14 +64,12 @@ export const ProductsPage = () => {
     if (isLoading) {
         return <p>Loading...</p>;
     }
-
     return (
         <>
             <Header />
-            <div>
-
+            <div className="container">
                 <h4>Paginate Data</h4>
-                <table>
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Name</th>

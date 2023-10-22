@@ -13,10 +13,10 @@ export const LoginPage = () => {
         email: "",
         password: "",
     })
-
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Handling Input Value
     const handleChange = (event) => {
         const { name, value } = event.target;
         // console.log('value:', value)
@@ -28,7 +28,6 @@ export const LoginPage = () => {
     }
 
     // Form Function
-
     const handleSubmit = async (event) => {
         // console.log("event : ", event)
         event.preventDefault();
@@ -43,14 +42,13 @@ export const LoginPage = () => {
 
             // console.log('res:', res.data)
             if (res.data.status) {
-                console.log('res.data:', res.data)
+                // console.log('res.data:', res.data)
                 toast.success(res.data.message);
                 axios.defaults.headers.common["Authorization"] = res?.data?.token;
                 navigate(location.state || res.data.navigate);
             } else {
                 toast.error(res.data.message);
-
-                console.log(res.data.devMessage);
+                // console.log(res.data.devMessage);
                 setFormData({
                     email: "",
                     password: "",
@@ -59,8 +57,7 @@ export const LoginPage = () => {
             }
 
         } catch (error) {
-            console.log("Error in register page :", error.message);
-
+            // console.log("Error in register page :", error.message);
             toast.error("Something went wrong ! Please try again..");
             setFormData({
                 email: "",
@@ -71,7 +68,6 @@ export const LoginPage = () => {
     }
 
     return (
-
         <>
             <Header />
             <div className="form-container" style={{ minHeight: "90vh" }}>

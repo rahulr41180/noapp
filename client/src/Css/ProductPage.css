@@ -1,0 +1,15 @@
+
+.container {
+
+    /* border: 1px solid blue; */
+    width: 800px;
+    margin: auto;
+    text-align: center;
+}
+
+.table {
+    border: 1px solid blue;
+    width: 100%;
+
+    font-size: 14px;
+}

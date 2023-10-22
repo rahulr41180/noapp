@@ -8,7 +8,7 @@ const requireSignIn = async (req, res, next) => {
     try {
         // console.log('req.headers.authorization:', req.headers.authorization)
         const decode = JWT.verify(req.headers.authorization, process.env.JWT_SECRET);
-        console.log('decode:', decode);
+        // console.log('decode:', decode);
         req.user = decode;
 
         next();
@@ -21,14 +21,14 @@ const requireSignIn = async (req, res, next) => {
 }
 
 
+// User Validation
 const isUser = async (req, res, next) => {
     try {
-
         // console.log('req.user._id:', req.user._id)
         const user = await userModel.findById(req.user._id);
-        console.log('user:', user)
+        // console.log('user:', user)
         if(user.role !== 0) {
-            console.log('user.role:', user.role)
+            // console.log('user.role:', user.role)
             return res.status(401).send({
 
                 status : false,
@@ -54,7 +54,7 @@ const isUser = async (req, res, next) => {
 const isAdmin = async (req, res, next) => {
     try {
         const user = await userModel.findById(req.user._id);
-        console.log('user:', user)
+        // console.log('user:', user)
         if(user.role !== 1) {
             return res.status(401).send({
                 status : false,
@@ -74,7 +74,6 @@ const isAdmin = async (req, res, next) => {
 }
 
 module.exports = {
-
     requireSignIn,
     isAdmin,
     isUser
