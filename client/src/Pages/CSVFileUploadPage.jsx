@@ -37,10 +37,10 @@ export const CSVFileUploadPage = () => {
                 toast.error(res.data.message);
                 setFile(null);
             }
-            
         } catch(error) {
             toast.error("Something went wrong! Please try again leter")
         }
+        
     }
 
     return (
