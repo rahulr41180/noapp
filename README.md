@@ -12,17 +12,17 @@ Clone the project
 https://github.com/rahulr41180/noapp
 
 ### <u>Run Commands on Frontend Side</u>
-Go Into Client Directory
-cd client
-npm install
-npm start
+- Go Into Client Directory
+- cd client
+- npm install
+- npm start
 
 It will open at "http://localhost:3000"
 
 ### <u>Run Commands on Server Slide</u>
-Go Into Server Folder Directory
-npm install
-npm server
+- Go Into Server Folder Directory
+- npm install
+- npm server
 
 <div style='page-break-after: always'></div>
 
