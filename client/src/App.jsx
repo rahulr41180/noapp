@@ -7,6 +7,7 @@ import { RegisterPage } from "./Auth/RegisterPage";
 import { LoginPage } from "./Auth/LoginPage";
 import { CSVFileUploadPage } from './Pages/CSVFileUploadPage';
 import { ProductsPage } from './Pages/ProductsPage';
+import { CSVFileUploadStatusPage } from './Pages/CSVFileUploadStatusPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/login" element={<><LoginPage /></>} />
       <Route path="/csv-file-upload" element={<><CSVFileUploadPage /></>} />
       <Route path="/get-all-products" element={<><ProductsPage /></>} />
+      <Route path="/get-all-csv-files" element={<><CSVFileUploadStatusPage /></>} />
     </Routes>
   );
 }

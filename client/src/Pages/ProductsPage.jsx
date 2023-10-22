@@ -86,7 +86,7 @@ export const ProductsPage = () => {
                     <tbody>
                         {products.map((element, index) => {
                             return (
-                                <tr>
+                                <tr key={index}>
                                     <th>{element.name}</th>
                                     <th>{element.desc}</th>
                                     <th>{element.price}</th>

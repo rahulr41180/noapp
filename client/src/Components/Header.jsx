@@ -32,7 +32,7 @@ export const Header = () => {
                                     <li><NavLink className="dropdown-item" to={"/csv-file-upload"}>Upload CSV File</NavLink></li>
 
                                     <li><NavLink className="dropdown-item" to={"/get-all-products"}>Products</NavLink></li>
-                                    <li><NavLink className="dropdown-item">File Status</NavLink></li>
+                                    <li><NavLink className="dropdown-item" to={"/get-all-csv-files"}>File Status</NavLink></li>
 
                                     
                                 </ul>

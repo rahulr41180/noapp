@@ -13,3 +13,17 @@
 
     font-size: 14px;
 }
+.container-1 {
+
+    /* border: 1px solid blue; */
+    width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.table-1 {
+    border: 1px solid blue;
+    width: 100%;
+
+    font-size: 14px;
+}
